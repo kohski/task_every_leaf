@@ -1,0 +1,16 @@
+<div class="container-fluid">
+  <%=form_with(model: @task,local: true) do |f| %>
+  <div class="row">
+    <%= f.label :name, class:"col-xs-offset-1 col-xs-2" %>
+    <%= f.text_field :name, class:"col-xs-8" %>  
+  </div>
+  <div class="row">
+    <%= f.label :content, class:"col-xs-offset-1 col-xs-2" %>
+    <%= f.text_area :content, class:"col-xs-8" %>
+  </div>
+  <div class="row submit_row">
+    <%= f.submit "登録",class:"col-xs-offset-1 btn btn-default"  %>
+    <button class="btn btn-default"><%= link_to '一覧へ',tasks_path  %></button>
+  </div>
+  <% end %>
+</div>
