@@ -1,0 +1,34 @@
+<div class="container-fluid">
+  <h1 class="top_heading"> Task 一覧 </h1>
+  <table class="table">
+    <div>
+      <tr>
+        <th>タスク名</th>
+        <th>内容</th>
+        <th>詳細</th>
+        <th>編集</th>
+        <th>削除</th>
+      </tr>
+    </div>
+    <% @tasks.each do |task| %>
+    <div>
+        <tr>
+          <td><%= task.name %></td>
+          <td><%= task.content %></td>
+          <td><%= link_to '詳細', task_path(task.id),class:"btn btn-default" %></td>
+          <td><%= link_to '編集', edit_task_path(task.id),class:"btn btn-default" %></td>
+          <td><%= link_to '削除', task_path(task.id),method: :delete,class:"btn btn-default" %></td>
+        </tr>
+    </div>
+    <% end %>
+  </table>
+  <div class="submit_row">
+    <button class="btn btn-default"><%= link_to '新しいタスク', new_task_path %></button>
+  </div>
+</div>
+
+
+
+
+
+
