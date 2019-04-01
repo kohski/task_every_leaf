@@ -14,5 +14,6 @@ module TaskEveryLeaf
       # g.helper false
       g.jbuilder false
     end
+    config.assets.initialize_on_precompile = false
   end
 end
