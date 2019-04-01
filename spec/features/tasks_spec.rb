@@ -21,12 +21,23 @@ RSpec.feature "タスク管理機能", type: :feature do
 
   end
 
-  scenario "任意のタスク詳細画面に遷移したら、該当タスクの内容が表示されたページに遷移する" do
+  scenario "タスク詳細のテスト" do
     FactoryBot.create(:task)
     visit root_path
     click_link "詳細"
     expect(page).to have_content "test task"
     expect(page).to have_content "test task content"  
+  end
+
+  scenario "タスク並び替えのテスト" do
+    task1 = FactoryBot.create(:task,:sequence)
+    task2 = FactoryBot.create(:task,:sequence)
+    task1.update(name:"test task name no.1 edit", content:"test task content no.1 edit")
+
+    visit root_path
+
+    expect(page.body.index(task1.name)).to be < page.body.index(task2.name)
+
   end
 
 end
