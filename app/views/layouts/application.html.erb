@@ -10,24 +10,27 @@
   </head>
 
   <body>
-    <% if notice != nil %>
-      <div class="container-fulid clearfix">
-        <div class=" col-xs-offset-1 col-xs-10 notice alert alert-info">
-          <%= notice %>
-        </div>    
-      </div>
-    <%  end %>
-
-    <div>
+    <div class="container-fluid">
+          <% if notice != nil %>
+        <div class="container-fulid clearfix">
+          <div class=" col-xs-offset-1 col-xs-10 notice alert alert-info">
+            <%= notice %>
+          </div>    
+        </div>
+      <%  end %>
       <% if @task && @task.errors.any? %>
-        <%= @task.errors.full_messages.length %>件のエラー
-        <% @task.errors.full_messages.each do |err| %>
-          <%= err %>
-        <% end %>
+        <div class="panel panel-danger">
+          <div class="panel-heading">
+            <%= @task.errors.full_messages.length %>件のエラー
+          </div>
+          <% @task.errors.full_messages.each do |err| %>
+          <div>
+            <%= err %>        
+          </div>
+          <% end %>
+        </div>
       <% end %>
+      <%= yield %>
     </div>
-
-
-    <%= yield %>
   </body>
 </html>

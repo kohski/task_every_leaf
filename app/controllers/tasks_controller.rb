@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   before_action :set_task,only:[:edit,:update,:show,:destroy]
 
   def index
-    @tasks = Task.all
+    @tasks = Task.order(:created_at)
   end
 
   def new
@@ -44,7 +44,11 @@ class TasksController < ApplicationController
   end
 
   def set_task
-    @task = Task.find(params[:id])
+    begin
+      @task = Task.find(params[:id])
+    rescue
+      redirect_to tasks_path, notice: "無効な入力です。"
+    end
   end
 
 end
