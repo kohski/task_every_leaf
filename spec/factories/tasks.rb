@@ -28,5 +28,17 @@ FactoryBot.define do
       content { '' } 
     end
 
+    trait :sort_by_expired_at_previous do
+      name { 'test name previous' }
+      content { 'test content previous' } 
+      expired_at { DateTime.now + 1 }
+    end
+
+    trait :sort_by_expired_at_following do
+      name { 'test name following' }
+      content { 'test content following' } 
+      expired_at { DateTime.now + 2 }
+    end
+
   end
 end
