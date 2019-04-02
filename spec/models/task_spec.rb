@@ -5,19 +5,19 @@ RSpec.describe Task, type: :model do
     it "is invalid without name" do
       task = FactoryBot.build(:task, :no_name)
       task.valid?
-      expect(task.errors[:name][0]).to include("can't be blank")
+      expect(task.errors[:name][0]).to include("入力してください")
     end
 
     it "is invalid with name over 255charactors" do
       task = FactoryBot.build(:task, :over_255_charactors_name)
       task.valid?
-      expect(task.errors[:name][0]).to include("is too long ")
+      expect(task.errors[:name][0]).to include("255文字以内で入力してください")
     end
 
     it "is invalid with content over 1,000 charactors" do
       task = FactoryBot.build(:task, :over_1000_charactors_content)
       task.valid?
-      expect(task.errors[:content][0]).to include("is too long ")
+      expect(task.errors[:content][0]).to include("1000文字以内で入力してください")
     end
 
     it "is valid with name(1..255charactors) and blank content" do
