@@ -44,11 +44,7 @@ class TasksController < ApplicationController
   end
 
   def set_task
-    begin
-      @task = Task.find(params[:id])      
-    rescue => exception
-      redirect_to tasks_path,notice: "無効な入力です"
-    end
+    @task = Task.find(params[:id])
   end
 
 end
