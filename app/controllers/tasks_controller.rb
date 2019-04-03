@@ -2,7 +2,11 @@ class TasksController < ApplicationController
   before_action :set_task,only:[:edit,:update,:show,:destroy]
 
   def index
-    @tasks = Task.order(:created_at)
+    if params[:sort_expired]
+      @tasks = Task.order(:expired_at)
+    else
+      @tasks = Task.order(:created_at)
+    end
   end
 
   def new
@@ -40,7 +44,16 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:name,:content)
+    req = params.require(:task).permit(:name,:content,:'expired_at(1i)',:'expired_at(2i)',:'expired_at(3i)',:'expired_at(4i)',:'expired_at(5i)')
+    name = req[:name]
+    content = req[:content]
+    year = req[:'expired_at(1i)'].to_i
+    month = req[:'expired_at(2i)'].to_i
+    day = req[:'expired_at(3i)'].to_i
+    hour = req[:'expired_at(4i)'].to_i
+    minutes = req[:'expired_at(5i)'].to_i
+    expired = DateTime.new(year,month,day,hour,minutes)
+    { name: name, content: content,expired_at: expired }
   end
 
   def set_task
