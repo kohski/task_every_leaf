@@ -65,7 +65,11 @@ class TasksController < ApplicationController
   end
 
   def set_task
-    @task = Task.find(params[:id])
+    begin
+      @task = Task.find(params[:id])
+    rescue
+      redirect_to tasks_path, notice: "無効な入力です。"
+    end
   end
 
   def set_status
