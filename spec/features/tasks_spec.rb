@@ -26,14 +26,13 @@ RSpec.feature "タスク管理機能", type: :feature do
     visit root_path
     click_link "詳細"
     expect(page).to have_content "test task"
-    expect(page).to have_content "test task content"  
+    expect(page).to have_content "test task content" 
   end
 
   scenario "タスク並び替えのテスト" do
     task1 = FactoryBot.create(:task,:sequence)
     task2 = FactoryBot.create(:task,:sequence)
     task1.update(name:"test task name no.1 edit", content:"test task content no.1 edit")
-
     visit root_path
     expect(page.body.index(task1.name)).to be < page.body.index(task2.name)
   end

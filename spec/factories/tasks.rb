@@ -2,7 +2,8 @@ FactoryBot.define do
   factory :task, class: 'task' do
     name { 'test task' }
     content { 'test task content' }
-
+    expired_at { DateTime.now + 1 }
+    status { 0 }
     trait :sequence do
       sequence(:name){|n| "test task name no.#{n}" }
       sequence(:content){|n| "test task content no.#{n}" }      
@@ -30,8 +31,7 @@ FactoryBot.define do
 
     trait :sort_by_expired_at_previous do
       name { 'test name previous' }
-      content { 'test content previous' } 
-      expired_at { DateTime.now + 1 }
+      content { 'test content previous' }
     end
 
     trait :sort_by_expired_at_following do
@@ -39,6 +39,42 @@ FactoryBot.define do
       content { 'test content following' } 
       expired_at { DateTime.now + 2 }
     end
+  end
 
+  factory :task_sort, class: 'task' do
+    name { 'test task sort' }
+    content { 'test task content sort' }
+    expired_at { DateTime.now + 1 }
+    status { 0 }
+
+    trait :name_a_status_0 do
+      name { 'a_name' }
+      status { 0 }
+    end
+
+    trait :name_a_status_1 do
+      name { 'a_name' }
+      status { 1 }
+    end
+
+    trait :name_a_status_2 do
+      name { 'a_name' }
+      status { 2 }
+    end
+
+    trait :name_b_status_0 do
+      name { 'b_name' }
+      status { 0 }
+    end
+
+    trait :name_b_status_1 do
+      name { 'b_name' }
+      status { 1 }
+    end
+
+    trait :name_b_status_2 do
+      name { 'b_name' }
+      status { 2 }
+    end
   end
 end

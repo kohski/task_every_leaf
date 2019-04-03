@@ -35,15 +35,19 @@ RSpec.describe Task, type: :model do
 
   context "scope test" do
     before do
-      task1 = Task.new(name:"aaa_name",status:0)
-      task2 = Task.new(name:"bbb_name",status:1)
-      task3 = Task.new(name:"ccc_name",status:2)
-      task4 = Task.new(name:"aaa_name",status:1)
-      task5 = Task.new(name:"ccc_name",status:0)
+      FactoryBot.create(:task_sort,:name_a_status_0)
+      FactoryBot.create(:task_sort,:name_a_status_1)
+      FactoryBot.create(:task_sort,:name_a_status_2)
+      FactoryBot.create(:task_sort,:name_b_status_0)
+      FactoryBot.create(:task_sort,:name_b_status_1)
+      FactoryBot.create(:task_sort,:name_b_status_2)
+      @tasks = Task.all
     end
 
     context "statusが未選択の場合" do
       it "nameが空欄で検索された場合全て表示される" do
+        sorted_task = subject { Task.search('', 4 ) }
+        expect(sorted_task).to include
       end
 
       it "nameの検索条件に合致するtaskがある場合nameのみで検索される" do
