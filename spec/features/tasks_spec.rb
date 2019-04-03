@@ -33,7 +33,6 @@ RSpec.feature "タスク管理機能", type: :feature do
     task1 = FactoryBot.create(:task,:sequence)
     task2 = FactoryBot.create(:task,:sequence)
     task1.update(name:"test task name no.1 edit", content:"test task content no.1 edit")
-
     visit root_path
     expect(page.body.index(task1.name)).to be < page.body.index(task2.name)
   end
