@@ -49,32 +49,32 @@ FactoryBot.define do
     status { 0 }
 
     trait :name_a_status_0 do
-      name { 'a_name' }
+      name { 'a_name_1' }
       status { 0 }
     end
 
     trait :name_a_status_1 do
-      name { 'a_name' }
+      name { 'a_name_2' }
       status { 1 }
     end
 
     trait :name_a_status_2 do
-      name { 'a_name' }
+      name { 'a_name_3' }
       status { 2 }
     end
 
     trait :name_b_status_0 do
-      name { 'b_name' }
+      name { 'b_name_1' }
       status { 0 }
     end
 
     trait :name_b_status_1 do
-      name { 'b_name' }
+      name { 'b_name_2' }
       status { 1 }
     end
 
     trait :name_b_status_2 do
-      name { 'b_name' }
+      name { 'b_name_3' }
       status { 2 }
     end
   end

@@ -17,8 +17,8 @@ RSpec.feature "タスク管理機能", type: :feature do
       click_button "登録"
       expect(page).to have_content "test name"
       expect(page).to have_content "test content"
-    }.to change(Task, :count).by(1)
-
+    .to change(Task, :count).by(1)
+    }    
   end
 
   scenario "タスク詳細のテスト" do
@@ -43,6 +43,38 @@ RSpec.feature "タスク管理機能", type: :feature do
     visit root_path
     click_link "期限でソート"
     expect(page.body.index(task_previous.name)).to be < page.body.index(task_following.name)
+  end
+
+  scenario "タイトル検索をしたら件数が変わるテスト" do
+    create_data_for_search_test
+    visit root_path
+    fill_in "task_name", with: "b_name"
+    click_button "Search!"
+    expect(page.body.index('b_name_1')).to be > 0
+    expect(page.body.index('b_name_2')).to be > 0
+    expect(page.body.index('b_name_3')).to be > 0
+  end
+
+  scenario "statusで検索をしたら件数が変わるテスト" do
+    create_data_for_search_test
+    visit root_path
+    select '未着手', from: :task_status
+    click_button "Search!"
+    expect(page.body.index('a_name_1')).to be > 0
+    expect(page.body.index('b_name_1')).to be > 0
+  end
+
+  scenario "なにも選択をせず検索をしても件数が変わらないテスト" do
+    create_data_for_search_test
+    visit root_path
+    click_button "Search!"
+    save_and_open_page
+    expect(page.body.index('a_name_1')).to be > 0
+    expect(page.body.index('a_name_2')).to be > 0
+    expect(page.body.index('a_name_3')).to be > 0
+    expect(page.body.index('b_name_1')).to be > 0
+    expect(page.body.index('b_name_2')).to be > 0
+    expect(page.body.index('b_name_3')).to be > 0
   end
 
 end

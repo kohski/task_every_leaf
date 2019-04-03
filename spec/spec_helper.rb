@@ -16,5 +16,13 @@ RSpec.configure do |config|
   end
 
   config.include FactoryBot::Syntax::Methods
+end
 
+def create_data_for_search_test
+  task1 = FactoryBot.create(:task_searched,:name_a_status_0)
+  task2 = FactoryBot.create(:task_searched,:name_a_status_1) 
+  task3 = FactoryBot.create(:task_searched,:name_a_status_2)
+  task4 = FactoryBot.create(:task_searched,:name_b_status_0) 
+  task5 = FactoryBot.create(:task_searched,:name_b_status_1) 
+  task6 = FactoryBot.create(:task_searched,:name_b_status_2) 
 end
