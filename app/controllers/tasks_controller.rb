@@ -6,12 +6,13 @@ class TasksController < ApplicationController
     if params.has_key?(:task) && params[:task][:search] == "true" 
       name = params[:task][:name]
       status = params[:task][:status]
+      status = "" if status.to_i > 2
       if name != "" && status !=""
-        @tasks = Task.where('name LIKE ? ',"%#{name}%").where(status: status)
+        @tasks = Task.search_both(name,status)
       elsif name != "" && status ==""
-        @tasks = Task.where('name LIKE ?',"%#{name}%")
+        @tasks = Task.search_name(name)
       elsif name == "" && status != ""
-        @tasks = Task.where(status: status)
+        @tasks = Task.search_status(status)
       else
         @tasks = Task.all
       end
