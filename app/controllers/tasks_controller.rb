@@ -51,7 +51,7 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    req = params.require(:task).permit(:name,:content,:'expired_at(1i)',:'expired_at(2i)',:'expired_at(3i)',:'expired_at(4i)',:'expired_at(5i)',:status)
+    req = params.require(:task).permit(:name,:content,:'expired_at(1i)',:'expired_at(2i)',:'expired_at(3i)',:'expired_at(4i)',:'expired_at(5i)',:status,:prioriry)
     name = req[:name]
     content = req[:content]
     year = req[:'expired_at(1i)'].to_i
@@ -61,7 +61,8 @@ class TasksController < ApplicationController
     minutes = req[:'expired_at(5i)'].to_i
     expired = DateTime.new(year,month,day,hour,minutes)
     status = req[:status].to_i
-    { name: name, content: content,expired_at: expired,status: status }
+    prioriry = req[:prioriry]
+    { name: name, content: content,expired_at: expired,status: status, prioriry: prioriry }
   end
 
   def set_task

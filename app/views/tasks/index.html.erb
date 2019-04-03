@@ -20,6 +20,7 @@
         <th>内容</th>
         <th>期限</th>
         <th>状態</th>
+        <th>優先</th>
         <th>詳細</th>
         <th>編集</th>
         <th>削除</th>
@@ -36,6 +37,7 @@
             <td><%= task.expired_at %></td>
           <% end %>
           <td><%= @status_set[task.status] %></td>
+          <td><%= task.prioriry %></td>
           <td><%= link_to '詳細', task_path(task.id),class:"btn btn-default" %></td>
           <td><%= link_to '編集', edit_task_path(task.id),class:"btn btn-default" %></td>
           <td><%= link_to '削除', task_path(task.id),method: :delete,class:"btn btn-default" %></td>
