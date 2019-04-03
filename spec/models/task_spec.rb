@@ -31,9 +31,41 @@ RSpec.describe Task, type: :model do
       task.valid?
       expect(task).to be_valid
     end
+  end
 
-    
+  context "scope test" do
+    before do
+      task1 = Task.new(name:"aaa_name",status:0)
+      task2 = Task.new(name:"bbb_name",status:1)
+      task3 = Task.new(name:"ccc_name",status:2)
+      task4 = Task.new(name:"aaa_name",status:1)
+      task5 = Task.new(name:"ccc_name",status:0)
+    end
 
+    context "statusが未選択の場合" do
+      it "nameが空欄で検索された場合全て表示される" do
+      end
+
+      it "nameの検索条件に合致するtaskがある場合nameのみで検索される" do
+      end
+
+      it "nameの検索条件に合致するtaskがない場合、何も表示されない" do
+      end
+
+    end
+
+    context "statusが選択されている場合" do
+      it "nameが空欄の場合、statusのみで検索される" do
+      end
+
+      it "nameの検索条件に合致するtaskがある場合、nameとtaskで検索される" do
+      end
+
+      it "nameの検索条件に合致するtaskがない場合、statusのみで検索される" do
+      end
+
+    end
 
   end
+
 end
