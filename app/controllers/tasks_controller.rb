@@ -4,8 +4,10 @@ class TasksController < ApplicationController
   def index
     if params[:sort_expired]
       @tasks = Task.order(:expired_at)
+      @status_set = show_status
     else
       @tasks = Task.order(:created_at)
+      @status_set = show_status
     end
   end
 
@@ -34,6 +36,7 @@ class TasksController < ApplicationController
   end
 
   def show
+    @status_set = show_status
   end
 
   def destroy
@@ -44,7 +47,7 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    req = params.require(:task).permit(:name,:content,:'expired_at(1i)',:'expired_at(2i)',:'expired_at(3i)',:'expired_at(4i)',:'expired_at(5i)')
+    req = params.require(:task).permit(:name,:content,:'expired_at(1i)',:'expired_at(2i)',:'expired_at(3i)',:'expired_at(4i)',:'expired_at(5i)',:status)
     name = req[:name]
     content = req[:content]
     year = req[:'expired_at(1i)'].to_i
@@ -53,11 +56,16 @@ class TasksController < ApplicationController
     hour = req[:'expired_at(4i)'].to_i
     minutes = req[:'expired_at(5i)'].to_i
     expired = DateTime.new(year,month,day,hour,minutes)
-    { name: name, content: content,expired_at: expired }
+    status = req[:status].to_i
+    { name: name, content: content,expired_at: expired,status: status  }
   end
 
   def set_task
     @task = Task.find(params[:id])
+  end
+
+  def show_status
+    ["未着手","着手","完成"]
   end
 
 end
