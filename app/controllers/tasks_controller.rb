@@ -1,11 +1,18 @@
 class TasksController < ApplicationController
   before_action :set_task,only:[:edit,:update,:show,:destroy]
+  before_action :set_status,only:[:show,:index]
 
   def index
-    if params[:sort_expired]
-      @tasks = Task.order(:expired_at)
+    if params.has_key?(:task) && params[:task][:search] == "true" 
+      @name = params[:task][:name]
+      @status = params[:task][:status]
+      @tasks = Task.search(@name, @status)
     else
-      @tasks = Task.order(:created_at)
+      if params[:sort_expired]
+        @tasks = Task.order(:expired_at)
+      else
+        @tasks = Task.order(:created_at)
+      end
     end
   end
 
@@ -44,7 +51,7 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    req = params.require(:task).permit(:name,:content,:'expired_at(1i)',:'expired_at(2i)',:'expired_at(3i)',:'expired_at(4i)',:'expired_at(5i)')
+    req = params.require(:task).permit(:name,:content,:'expired_at(1i)',:'expired_at(2i)',:'expired_at(3i)',:'expired_at(4i)',:'expired_at(5i)',:status)
     name = req[:name]
     content = req[:content]
     year = req[:'expired_at(1i)'].to_i
@@ -53,7 +60,8 @@ class TasksController < ApplicationController
     hour = req[:'expired_at(4i)'].to_i
     minutes = req[:'expired_at(5i)'].to_i
     expired = DateTime.new(year,month,day,hour,minutes)
-    { name: name, content: content,expired_at: expired }
+    status = req[:status].to_i
+    { name: name, content: content,expired_at: expired,status: status }
   end
 
   def set_task
@@ -62,6 +70,10 @@ class TasksController < ApplicationController
     rescue
       redirect_to tasks_path, notice: "無効な入力です。"
     end
+  end
+
+  def set_status
+    @status_set = ["未着手","着手","完成"]
   end
 
 end

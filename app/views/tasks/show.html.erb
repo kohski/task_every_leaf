@@ -9,6 +9,10 @@
     <%= @task.content %>
   </div>
   <div class="row">
+    <p>状態 :</p>
+    <%= @status_set[@task.status] %>
+  </div>  
+  <div class="row">
     <p>期限 :</p>
     <%= @task.expired_at.strftime("%m/%d %H:%M") %>
   </div>
