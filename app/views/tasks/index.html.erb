@@ -6,9 +6,9 @@
   <div class="row">
     <%= form_with(model: Task.new, local: true, url: tasks_path, method: :get) do |f| %>  
     <%= f.label :name_search, "タイトル検索" %>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, value: @name %>
     <%= f.label :status_search, "状態検索" %>
-    <%= f.select :status,[["未選択",4],["未着手",0],["着手",1],["完成",2]] %>
+    <%= f.select :status,[["未選択",4],["未着手",0],["着手",1],["完成",2]], selected: @status %>
     <%= f.hidden_field :search, value: true %>
     <%= f.submit "Search!" %>  
   </div>

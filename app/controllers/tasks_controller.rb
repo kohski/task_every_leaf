@@ -4,18 +4,9 @@ class TasksController < ApplicationController
 
   def index
     if params.has_key?(:task) && params[:task][:search] == "true" 
-      name = params[:task][:name]
-      status = params[:task][:status]
-      status = "" if status.to_i > 2
-      if name != "" && status !=""
-        @tasks = Task.search_both(name,status)
-      elsif name != "" && status ==""
-        @tasks = Task.search_name(name)
-      elsif name == "" && status != ""
-        @tasks = Task.search_status(status)
-      else
-        @tasks = Task.all
-      end
+      @name = params[:task][:name]
+      @status = params[:task][:status]
+      @tasks = Task.search(@name, @status)
     else
       if params[:sort_expired]
         @tasks = Task.order(:expired_at)
