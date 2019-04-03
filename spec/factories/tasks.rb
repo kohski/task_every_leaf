@@ -2,6 +2,7 @@ FactoryBot.define do
   factory :task, class: 'task' do
     name { 'test task' }
     content { 'test task content' }
+    expired_at { DateTime.now + 1 }
 
     trait :sequence do
       sequence(:name){|n| "test task name no.#{n}" }
@@ -31,7 +32,6 @@ FactoryBot.define do
     trait :sort_by_expired_at_previous do
       name { 'test name previous' }
       content { 'test content previous' } 
-      expired_at { DateTime.now + 1 }
     end
 
     trait :sort_by_expired_at_following do
