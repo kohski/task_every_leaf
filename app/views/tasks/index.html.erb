@@ -2,6 +2,7 @@
   <h1 class="top_heading"> Task 一覧 </h1>
   <div class="row">
     <button class="btn btn-default"><%= link_to '期限でソート', tasks_path(sort_expired: true) %></button>
+    <button class="btn btn-default"><%= link_to '優先度でソート', tasks_path(sort_priority: true) %></button>
   </div>
   <div class="row">
     <%= form_with(model: Task.new, local: true, url: tasks_path, method: :get) do |f| %>  
@@ -37,7 +38,7 @@
             <td><%= task.expired_at %></td>
           <% end %>
           <td><%= @status_set[task.status] %></td>
-          <td><%= task.prioriry %></td>
+          <td><%= task.priority %></td>
           <td><%= link_to '詳細', task_path(task.id),class:"btn btn-default" %></td>
           <td><%= link_to '編集', edit_task_path(task.id),class:"btn btn-default" %></td>
           <td><%= link_to '削除', task_path(task.id),method: :delete,class:"btn btn-default" %></td>

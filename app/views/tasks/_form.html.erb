@@ -13,8 +13,8 @@
     <%= f.select :status,[["未着手",0],["着手",1],["完成",2]] %>
   </div>
   <div class="row">
-    <%= f.label :prioriry, class:"col-xs-offset-1 col-xs-2" %>
-    <%= f.select :prioriry, Task.prioriries.keys, {} %>
+    <%= f.label :priority, class:"col-xs-offset-1 col-xs-2" %>
+    <%= f.select :priority, Task.priorities.keys, {} %>
   </div>
   <div class="row">
     <%= f.label :expired_at, class:"col-xs-offset-1 col-xs-2" %>

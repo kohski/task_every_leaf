@@ -7,12 +7,12 @@ class TasksController < ApplicationController
       @name = params[:task][:name]
       @status = params[:task][:status]
       @tasks = Task.search(@name, @status)
+    elsif params[:sort_expired]
+      @tasks = Task.order(:expired_at)
+    elsif params[:sort_priority]
+      @tasks = Task.order(priority: :desc)
     else
-      if params[:sort_expired]
-        @tasks = Task.order(:expired_at)
-      else
-        @tasks = Task.order(:created_at)
-      end
+      @tasks = Task.order(:created_at)
     end
   end
 
@@ -51,7 +51,7 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    req = params.require(:task).permit(:name,:content,:'expired_at(1i)',:'expired_at(2i)',:'expired_at(3i)',:'expired_at(4i)',:'expired_at(5i)',:status,:prioriry)
+    req = params.require(:task).permit(:name,:content,:'expired_at(1i)',:'expired_at(2i)',:'expired_at(3i)',:'expired_at(4i)',:'expired_at(5i)',:status,:priority)
     name = req[:name]
     content = req[:content]
     year = req[:'expired_at(1i)'].to_i
@@ -61,8 +61,8 @@ class TasksController < ApplicationController
     minutes = req[:'expired_at(5i)'].to_i
     expired = DateTime.new(year,month,day,hour,minutes)
     status = req[:status].to_i
-    prioriry = req[:prioriry]
-    { name: name, content: content,expired_at: expired,status: status, prioriry: prioriry }
+    priority = req[:priority]
+    { name: name, content: content,expired_at: expired,status: status, priority: priority }
   end
 
   def set_task

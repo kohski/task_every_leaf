@@ -68,13 +68,24 @@ RSpec.feature "タスク管理機能", type: :feature do
     create_data_for_search_test
     visit root_path
     click_button "Search!"
-    save_and_open_page
     expect(page.body.index('a_name_1')).to be > 0
     expect(page.body.index('a_name_2')).to be > 0
     expect(page.body.index('a_name_3')).to be > 0
     expect(page.body.index('b_name_1')).to be > 0
     expect(page.body.index('b_name_2')).to be > 0
     expect(page.body.index('b_name_3')).to be > 0
+  end
+
+  scenario "タスク優先度によるによる並び替えのテスト" do
+    task_low_priority = FactoryBot.create(:task, :low_priority)
+    task_middle_priority = FactoryBot.create(:task, :middle_priority)
+    task_high_priority = FactoryBot.create(:task, :high_priority)
+    visit root_path
+    click_link "優先度でソート"
+    save_and_open_page
+    expect(page.body.index(task_high_priority.name)).to be < page.body.index(task_middle_priority.name)
+    expect(page.body.index(task_middle_priority.name)).to be < page.body.index(task_low_priority.name)
+    expect(page.body.index(task_high_priority.name)).to be < page.body.index(task_low_priority.name)
   end
 
 end
