@@ -1,6 +1,7 @@
 class TasksController < ApplicationController
   before_action :set_task,only:[:edit,:update,:show,:destroy]
   before_action :set_status,only:[:show,:index]
+  before_action :logg_in_check
 
   def index
     if params.has_key?(:task) && params[:task][:search] == "true" 
@@ -75,6 +76,12 @@ class TasksController < ApplicationController
 
   def set_status
     @status_set = ["未着手","着手","完成"]
+  end
+
+  def logg_in_check
+    unless logged_in?
+      redirect_to new_session_path,notice: "ログインまたはサインアップしてください"
+    end
   end
 
 end
