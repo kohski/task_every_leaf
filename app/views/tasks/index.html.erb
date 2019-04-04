@@ -29,22 +29,23 @@
     </div>
     <% @tasks.each do |task| %>
     <div>
-        <tr>
-          <td><%= task.name %></td>
-          <td><%= task.content %></td>
-          <% if task.expired_at %>
-            <td><%= task.expired_at.strftime("%m/%d %H:%M") %></td>
-          <% else %>
-            <td><%= task.expired_at %></td>
-          <% end %>
-          <td><%= @status_set[task.status] %></td>
-          <td><%= task.priority %></td>
-          <td><%= link_to '詳細', task_path(task.id),class:"btn btn-default" %></td>
-          <td><%= link_to '編集', edit_task_path(task.id),class:"btn btn-default" %></td>
-          <td><%= link_to '削除', task_path(task.id),method: :delete,class:"btn btn-default" %></td>
-        </tr>
+      <tr>
+        <td><%= task.name %></td>
+        <td><%= task.content %></td>
+        <% if task.expired_at %>
+          <td><%= task.expired_at.strftime("%m/%d %H:%M") %></td>
+        <% else %>
+          <td><%= task.expired_at %></td>
+        <% end %>
+        <td><%= @status_set[task.status] %></td>
+        <td><%= task.priority %></td>
+        <td><%= link_to '詳細', task_path(task.id),class:"btn btn-default" %></td>
+        <td><%= link_to '編集', edit_task_path(task.id),class:"btn btn-default" %></td>
+        <td><%= link_to '削除', task_path(task.id),method: :delete,class:"btn btn-default" %></td>
+      </tr>
     </div>
     <% end %>
+    <%= paginate @tasks, themes: :bootstrap3 %>
   </table>
   <div class="submit_row">
     <button class="btn btn-default"><%= link_to '新しいタスク', new_task_path %></button>
