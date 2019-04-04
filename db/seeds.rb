@@ -6,12 +6,17 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-50.times do
-  Task.create(
-    name:Faker::Food.dish,
-    content:Faker::Food.description,
-    expired_at: DateTime.now + rand(1..4),
-    status:rand(0..2),
-    priority: rand(0..2)
-  )
+case ENV["data"]
+  when "task"
+    50.times do
+      Task.create(
+        name:Faker::Food.dish,
+        content:Faker::Food.description,
+        expired_at: DateTime.now + rand(1..4),
+        status:rand(0..2),
+        priority: rand(0..2)
+      )
+    end
+  when "user"
+    User.create(name:"test user #{User.count+1}", email:"test#{User.count+1}@test.com", password:"tttest")
 end

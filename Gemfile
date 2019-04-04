@@ -16,6 +16,7 @@ gem 'jquery-ui-rails'
 gem 'dotenv-rails'
 gem 'kaminari'
 gem 'faker'
+gem 'bcrypt', '3.1.11'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

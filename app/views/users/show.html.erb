@@ -1,0 +1,16 @@
+<div class="container-fluid">
+  <h1 class="top_heading">タスク詳細</h1>
+  <div class="table">
+    <div class="row">
+      <label class="col-xs-offset-1 col-xs-2">名前 :</label>
+      <p class="col-xs-8 show_content"><%= @user.name %></label>
+    </div>
+    <div class="row">
+      <label class="col-xs-offset-1 col-xs-2">Emailアドレス :</label>
+      <p class="col-xs-8 show_content"><%= @user.email %></p>
+    </div>
+    <div class="row submit_row">
+      <%= link_to 'タスク一覧', tasks_path,class: "btn btn-default" %>
+    </div>  
+  </div>
+</div>

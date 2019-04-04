@@ -82,7 +82,6 @@ RSpec.feature "タスク管理機能", type: :feature do
     task_high_priority = FactoryBot.create(:task, :high_priority)
     visit root_path
     click_link "優先度でソート"
-    save_and_open_page
     expect(page.body.index(task_high_priority.name)).to be < page.body.index(task_middle_priority.name)
     expect(page.body.index(task_middle_priority.name)).to be < page.body.index(task_low_priority.name)
     expect(page.body.index(task_high_priority.name)).to be < page.body.index(task_low_priority.name)
