@@ -3,18 +3,17 @@ class TasksController < ApplicationController
   before_action :set_status,only:[:show,:index]
 
   def index
-    # if params.has_key?(:task) && params[:task][:search] == "true" 
-    #   @name = params[:task][:name]
-    #   @status = params[:task][:status]
-    #   @tasks = Task.search(@name, @status)
-    # elsif params[:sort_expired]
-    #   @tasks = Task.order(:expired_at)
-    # elsif params[:sort_priority]
-    #   @tasks = Task.order(priority: :desc)
-    # else
-    #   @tasks = Task.order(:created_at)
-    # end
-    @tasks = Task.page(params[:page]).per(10)
+    if params.has_key?(:task) && params[:task][:search] == "true" 
+      @name = params[:task][:name]
+      @status = params[:task][:status]
+      @tasks = Task.search(@name, @status).page(params[:page]).per(10)
+    elsif params[:sort_expired]
+      @tasks = Task.order(:expired_at).page(params[:page]).per(10)
+    elsif params[:sort_priority]
+      @tasks = Task.order(priority: :desc).page(params[:page]).per(10)
+    else
+      @tasks = Task.order(:created_at).page(params[:page]).per(10)
+    end
   end
 
   def new
