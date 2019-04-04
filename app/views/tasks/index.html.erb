@@ -1,9 +1,9 @@
 <div class="container-fluid">
   <h1 class="top_heading"> Task 一覧 </h1>
   <div class="row">
-    <button class="btn btn-default"><%= link_to '期限でソート', tasks_path(sort_expired: true) %></button>
-    <button class="btn btn-default"><%= link_to '優先度でソート', tasks_path(sort_priority: true) %></button>
-  </div>
+    <%= link_to '期限でソート', tasks_path(sort_expired: true),class: "btn btn-default" %>
+    <%= link_to '優先度でソート', tasks_path(sort_priority: true),class: "btn btn-default" %>
+    </div>
   <div class="row">
     <%= form_with(model: Task.new, local: true, url: tasks_path, method: :get) do |f| %>  
     <%= f.label :name_search, "タイトル検索" %>
@@ -48,7 +48,7 @@
     <%= paginate @tasks, themes: :bootstrap3 %>
   </table>
   <div class="submit_row">
-    <button class="btn btn-default"><%= link_to '新しいタスク', new_task_path %></button>
+    <%= link_to '新しいタスク', new_task_path,class: "btn btn-default" %>
   </div>
 </div>
 
