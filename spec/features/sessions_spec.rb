@@ -17,7 +17,6 @@ RSpec.feature "Sessions", type: :feature do
     fill_in "Email", with: user.email
     fill_in "Password", with: user.password+"error"
     click_button "登録"
-    save_and_open_page
     expect(page).to have_content "Log in"
     expect(page).to have_content "ログイン失敗しました"
   end
