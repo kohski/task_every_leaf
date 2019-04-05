@@ -5,6 +5,7 @@ FactoryBot.define do
     expired_at { DateTime.now + 1 }
     status { 0 }
     priority { 0 }
+    association :user
 
     trait :sequence do
       sequence(:name){|n| "test task name no.#{n}" }
