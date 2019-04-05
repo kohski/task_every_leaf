@@ -21,5 +21,12 @@ case ENV["data"]
       )
     end
   when "user"
-    User.create(name:"test user #{User.count+1}", email:"test#{User.count+1}@test.com", password:"tttest")
+    5.times do
+      pokemon = Faker::Games::Pokemon.name
+      User.create(
+        name: pokemon,
+        email:"#{ pokemon }@test.com",
+        password:"tttest"
+      )  
+    end
 end

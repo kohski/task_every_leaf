@@ -34,16 +34,6 @@ RSpec.describe Task, type: :model do
   end
 
   context "scope test" do
-    before do
-      # FactoryBot.create(:task_sort,:name_a_status_0)
-      # FactoryBot.create(:task_sort,:name_a_status_1)
-      # FactoryBot.create(:task_sort,:name_a_status_2)
-      # FactoryBot.create(:task_sort,:name_b_status_0)
-      # FactoryBot.create(:task_sort,:name_b_status_1)
-      # FactoryBot.create(:task_sort,:name_b_status_2)
-      # @tasks = Task.all
-    end
-
     let!(:task1){ create(:task_searched,:name_a_status_0) }
     let!(:task2){ create(:task_searched,:name_a_status_1) }
     let!(:task3){ create(:task_searched,:name_a_status_2) }
