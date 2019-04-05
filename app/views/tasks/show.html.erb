@@ -1,19 +1,24 @@
 <div class="container-fluid">
-  <h1>タスク詳細</h1>
-  <div class="row">
-    <p>タスク名 :</p>
-    <%= @task.name %>
-  </div>
-  <div class="row">
-    <p>タスク内容 :</p>
-    <%= @task.content %>
-  </div>
-  <div class="row">
-    <p>状態 :</p>
-    <%= @status_set[@task.status] %>
-  </div>  
-  <div class="row">
-    <p>期限 :</p>
-    <%= @task.expired_at.strftime("%m/%d %H:%M") %>
+  <h1 class="top_heading">タスク詳細</h1>
+  <div class="table">
+    <div class="row">
+      <label class="col-xs-offset-1 col-xs-2">タスク名 :</label>
+      <p class="col-xs-8 show_content"><%= @task.name %></label>
+    </div>
+    <div class="row">
+      <label class="col-xs-offset-1 col-xs-2">タスク内容 :</label>
+      <p class="col-xs-8 show_content"><%= @task.content %></p>
+    </div>
+    <div class="row">
+      <label class="col-xs-offset-1 col-xs-2">状態 :</label>
+      <p class="col-xs-8 show_content"><%= @status_set[@task.status] %></p>
+    </div>  
+    <div class="row">
+      <label class="col-xs-offset-1 col-xs-2">期限 :</label>
+      <p class="col-xs-8 show_content"><%= @task.expired_at.strftime("%m/%d %H:%M") %></p>
+    </div>
+    <div class="row submit_row">
+      <%= link_to '一覧へ戻る', tasks_path,class: "btn btn-default" %>
+    </div>  
   </div>
 </div>
