@@ -1,13 +1,16 @@
 require 'rails_helper'
 
 RSpec.feature "タスク管理機能", type: :feature do
-  scenario "タスク一覧のテスト" do
-    FactoryBot.create(:task)
-    
-    visit root_path
-    expect(page).to have_content "test task"
-    expect(page).to have_content "test task content"
+  before do    
+    log_in
   end
+
+  # scenario "タスク一覧のテスト" do
+  #   FactoryBot.create(:task)
+  #   visit root_path
+  #   expect(page).to have_content "test task"
+  #   expect(page).to have_content "test task content"
+  # end
 
   # scenario "タスク作成のテスト" do
   #   visit root_path
