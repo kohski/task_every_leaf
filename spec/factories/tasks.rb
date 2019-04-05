@@ -4,6 +4,7 @@ FactoryBot.define do
     content { 'test task content' }
     expired_at { DateTime.now + 1 }
     status { 0 }
+    priority { 0 }
 
     trait :sequence do
       sequence(:name){|n| "test task name no.#{n}" }
@@ -40,6 +41,22 @@ FactoryBot.define do
       content { 'test content following' } 
       expired_at { DateTime.now + 2 }
     end
+
+    trait :low_priority do
+      name { 'low priority task' }
+      priority { 0 }      
+    end
+
+    trait :middle_priority do
+      name { 'middle priority task' }
+      priority { 1 }      
+    end
+
+    trait :high_priority do
+      name { 'high priority task' }
+      priority { 2 }      
+    end
+
   end
 
   factory :task_searched, class: 'task' do
