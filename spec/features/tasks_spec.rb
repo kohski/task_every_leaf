@@ -54,7 +54,7 @@ RSpec.feature "タスク管理機能", type: :feature do
     expect(page.body.index('b_name_2')).to be > 0
     expect(page.body.index('b_name_3')).to be > 0
   end
-
+  
   scenario "statusで検索をしたら件数が変わるテスト" do
     create_data_for_search_test
     visit root_path
