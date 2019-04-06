@@ -11,6 +11,26 @@
     </div>
     <div class="row submit_row">
       <%= link_to 'ユーザー一覧', admin_users_path,class: "btn btn-default" %>
-    </div>  
+    </div>
+    <div>
+      <table class="table">
+        <tr>
+          <th>タスク名</th>
+          <th>内容</th>
+          <th>期限</th>
+          <th>状態</th>
+          <th>優先度</th>
+        </tr>
+        <% @user.tasks.each do |task| %>
+          <tr>
+            <td><%= task.name %></td>
+            <td><%= task.content %></td>
+            <td><%= task.expired_at %></td>
+            <td><%= task.status %></td>
+            <td><%= task.priority %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
   </div>
 </div>
