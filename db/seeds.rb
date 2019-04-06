@@ -7,6 +7,30 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 case ENV["data"]
+<<<<<<< HEAD
+when "task"
+  user_start = User.first.id
+  user_end = User.last.id
+  50.times do
+    Task.create(
+      name:Faker::Food.dish,
+      content:Faker::Food.description,
+      expired_at: DateTime.now + rand(1..4),
+      status:rand(0..2),
+      priority: rand(0..2),
+      user_id: rand(user_start..user_end)
+    )
+  end
+when "user"
+  5.times do
+    pokemon = Faker::Games::Pokemon.name
+    User.create(
+      name: pokemon,
+      email:"#{ pokemon }@test.com",
+      password:"tttest"
+    )  
+  end
+=======
   when "task"
     user_start = User.first.id
     user_end = User.last.id
@@ -29,4 +53,5 @@ case ENV["data"]
         password:"tttest"
       )  
     end
+>>>>>>> eb885711e25c1482663ca3ef958db14737c5fd21
 end
