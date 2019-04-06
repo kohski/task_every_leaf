@@ -1,8 +1,9 @@
 class Admin::UsersController < ApplicationController
   before_action :set_user, only: [:show,:edit,:update,:destroy]
+  before_action :log_in_check
 
   def index
-    @users = User.all
+    @users = User.all.includes(:tasks)
   end
 
 
@@ -53,4 +54,9 @@ class Admin::UsersController < ApplicationController
     params.require(:user).permit(:email,:password)  
   end
 
+  def log_in_check
+    unless logged_in?
+      redirect_to new_session_path, notice: "ログインかサインアップをしてくださいｓ"
+    end
+  end
 end

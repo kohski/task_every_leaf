@@ -28,5 +28,5 @@ case ENV["data"]
         email:"#{ pokemon }@test.com",
         password:"tttest"
       )  
-    end
+  end
 end
