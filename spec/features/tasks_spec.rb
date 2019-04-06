@@ -109,8 +109,8 @@ RSpec.feature "タスク管理機能", type: :feature do
 
   context "タスクの絞り込みのテスト" do
     scenario "タイトル検索をしたら件数が変わるテスト" do
-      task1 = create_task(@user,name_keyword: "key")
-      task2 = create_task(@user,name_keyword: "")
+      task1 = create_task(@user,keyword: "key")
+      task2 = create_task(@user,keyword: "")
       visit root_path
       fill_in "task_name", with: "key"
       click_button "Search!"
