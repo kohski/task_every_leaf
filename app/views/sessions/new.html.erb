@@ -1,0 +1,14 @@
+<h1 class="top_heading">Log in</h1>
+<%= form_with( scope: :sessions, url: sessions_path, local: true) do |f| %>
+  <div class="row">
+    <%= f.label :email, class:"col-xs-offset-2 col-xs-2" %>
+    <%= f.email_field :email, class:"col-xs-5" %>
+  </div>
+  <div class="row">
+    <%= f.label :password, class:"col-xs-offset-2 col-xs-2" %>
+    <%= f.password_field :password, class:"col-xs-5" %>
+  </div>
+  <div class="row submit_row">
+    <%= f.submit "登録",class: "btn btn-default" %>
+  </div>
+<% end %>

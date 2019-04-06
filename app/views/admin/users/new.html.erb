@@ -1,0 +1,25 @@
+<h1 class="top_heading">Admin User Sign up</h1>
+<div class="container-fluid">
+  <%=form_with(model: @user,local: true, url: admin_users_path,) do |f| %>
+  <div class="row">
+    <%= f.label :name, class:"col-xs-offset-2 col-xs-2" %>
+    <%= f.text_field :name, class:"col-xs-5" %>  
+  </div>
+  <div class="row">
+    <%= f.label :email, class:"col-xs-offset-2 col-xs-2" %>
+    <%= f.email_field :email, class:"col-xs-5" %>
+  </div>
+  <div class="row">
+    <%= f.label :password, class:"col-xs-offset-2 col-xs-2" %>
+    <%= f.password_field :password, class:"col-xs-5" %>
+  </div>
+  <div class="row">
+    <%= f.label :password_confirm, class:"col-xs-offset-2 col-xs-2" %>
+    <%= f.password_field :password_confirm, class:"col-xs-5" %>
+  </div>
+  <div class="row submit_row">
+    <%= f.submit "登録",class: "btn btn-default" %>
+    <%= link_to 'ユーザー一覧', admin_users_path,class: "btn btn-default" %>
+  </div>
+  <% end %>
+</div>
