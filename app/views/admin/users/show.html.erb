@@ -9,6 +9,14 @@
       <label class="col-xs-offset-1 col-xs-2">Emailアドレス :</label>
       <p class="col-xs-8 show_content"><%= @user.email %></p>
     </div>
+    <div class="row">
+      <label class="col-xs-offset-1 col-xs-2">権限 :</label>
+      <% if @user.is_admin %>
+       <p class="col-xs-8 show_content">管理者権限</p>
+      <% else %>
+        <p class="col-xs-8 show_content">ユーザー権限</p>
+      <% end %>
+    </div>
     <div class="row submit_row">
       <%= link_to 'ユーザー一覧', admin_users_path,class: "btn btn-default" %>
     </div>
