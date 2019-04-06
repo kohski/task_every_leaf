@@ -1,6 +1,9 @@
+require './app/exceptions/no_admin_error.rb'
+
 class Admin::UsersController < ApplicationController
   before_action :set_user, only: [:show,:edit,:update,:destroy]
   before_action :log_in_check
+  before_action :admin_check
 
   def index
     @users = User.all.includes(:tasks)
@@ -56,7 +59,20 @@ class Admin::UsersController < ApplicationController
 
   def log_in_check
     unless logged_in?
-      redirect_to new_session_path, notice: "ログインかサインアップをしてくださいｓ"
+      redirect_to new_session_path, notice: "ログインかサインアップをしてください"
+    end
+  end
+
+  def admin_check
+  is_admin = current_user.is_admin
+    begin
+      unless is_admin
+        raise NoAdminError
+      end
+    rescue => exception
+      puts exception
+      render file: Rails.root.join('public/no_admin.html'), status: 401, layout: false, content_type: 'text/html'
+
     end
   end
 end
