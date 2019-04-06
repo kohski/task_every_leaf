@@ -62,6 +62,16 @@ RSpec.feature "AdminUsers", type: :feature do
       count_after = User.count 
       expect(count_after).to eq(count_before - 1)
     end
+
+    it "ユーザー削除した場合、付随するタスクも削除される" do
+      create_task(@user)
+      count_before = Task.count
+      visit admin_users_path
+      click_link "削除"
+      count_after = Task.count 
+      expect(count_after).to eq(count_before - 1)
+    end
+
   end
   context "未ログイン状態" do
     it "ユーザー一覧にアクセスするとログイン画面へ遷移する" do
