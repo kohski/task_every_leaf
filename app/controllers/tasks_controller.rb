@@ -25,6 +25,7 @@ class TasksController < ApplicationController
     @task = current_user.tasks.new(task_params)
     if @task.save
       redirect_to tasks_path,notice: "タスクを登録しました"
+      build_labeling      
     else
       render 'new'
     end
@@ -36,6 +37,7 @@ class TasksController < ApplicationController
   def update
     if @task.update(task_params)
       redirect_to tasks_path,notice:"タスクを編集しました"
+      build_labeling
     else
       render 'edit'
     end
@@ -52,7 +54,7 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    req = params.require(:task).permit(:name,:content,:'expired_at(1i)',:'expired_at(2i)',:'expired_at(3i)',:'expired_at(4i)',:'expired_at(5i)',:status,:priority)
+    req = params.require(:task).permit(:name,:content,:'expired_at(1i)',:'expired_at(2i)',:'expired_at(3i)',:'expired_at(4i)',:'expired_at(5i)',:status,:priority,:'label_ids')
     name = req[:name]
     content = req[:content]
     year = req[:'expired_at(1i)'].to_i
@@ -81,6 +83,16 @@ class TasksController < ApplicationController
   def logg_in_check
     unless logged_in?
       redirect_to new_session_path,notice: "ログインまたはサインアップしてください"
+    end
+  end
+
+  def build_labeling
+    @task.labelings.destroy_all
+    label_ids = params[:task][:label_ids]
+    if label_ids.size > 0
+      label_ids.each do |id|
+        @task.labelings.create(label_id:id)
+      end
     end
   end
 

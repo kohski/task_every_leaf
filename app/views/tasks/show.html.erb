@@ -17,6 +17,14 @@
       <label class="col-xs-offset-1 col-xs-2">期限 :</label>
       <p class="col-xs-8 show_content"><%= @task.expired_at.strftime("%m/%d %H:%M") %></p>
     </div>
+    <div class="row">
+      <label class="col-xs-offset-1 col-xs-2">ラベル :</label>
+      <div class="col-xs-8">
+        <% @task.labelings.each do |label| %>
+          <span class="show_content"><%= label.label.name %></span>
+        <% end %>
+      </div>
+    </div>
     <div class="row submit_row">
       <%= link_to '一覧へ戻る', tasks_path,class: "btn btn-default" %>
     </div>  
