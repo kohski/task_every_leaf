@@ -5,7 +5,8 @@
       <tr>
         <th>ラベル名</th>
         <th>内容</th>
-        <th>タスク件数</th>
+        <th>編集</th>
+        <th>削除</th>
       </tr>
     </div>
     <% @labels.each do |label| %>
@@ -13,7 +14,8 @@
       <tr>
         <td><%= label.name %></td>
         <td><%= label.content %></td>
-        <td>dummy</td>
+        <td><%= link_to '編集', edit_label_path(label.id), class: "btn btn-default" %></td>
+        <td><%= link_to '削除', label_path(label.id), method: :delete, class: "btn btn-default" %></td>
       </tr>
     </div>
     <% end %>

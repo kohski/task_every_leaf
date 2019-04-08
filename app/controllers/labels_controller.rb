@@ -10,6 +10,7 @@ class LabelsController < ApplicationController
     if @label.save
       redirect_to labels_path, notice: "ラベルを保存しました"
     else
+      flash.now[:notice] = "同じ名前のラベルは登録できません"
       render 'new'
     end
   end
@@ -34,7 +35,7 @@ class LabelsController < ApplicationController
 
   def destroy
     @label.destroy
-    redirect_to tasks_path, notic: "labelを削除しました"
+    redirect_to labels_path, notice: "labelを削除しました"
   end
 
   private
