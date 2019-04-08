@@ -3,6 +3,7 @@ ja:
     models:
       task: "タスク"
       user: "ユーザー"
+      label: "ラベル"
     attributes:
       task:
         name: "名前"
@@ -12,6 +13,9 @@ ja:
         email: "メールアドレス"
         password: "パスワード"
         password_confirm: "パスワード確認"
+      label:
+        name: "名前"
+        content: "内容"
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'
