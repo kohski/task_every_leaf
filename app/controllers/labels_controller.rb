@@ -37,8 +37,6 @@ class LabelsController < ApplicationController
     redirect_to tasks_path, notic: "labelを削除しました"
   end
 
-
-
   private
 
   def set_label

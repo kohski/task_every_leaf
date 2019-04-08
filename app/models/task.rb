@@ -1,9 +1,5 @@
 class Task < ApplicationRecord
 
-  # scope :search_both, -> (name, status){where('name LIKE ? ',"%#{name}%").where(status: status)}
-  # scope :search_name, ->(name){ where('name LIKE ?',"%#{name}%") }
-  # scope :search_status, -> (status){ where(status: status) }
-
   scope :search, -> (name,status){
     status = "" if status.to_i > 2
     if name != "" && status !=""
@@ -24,4 +20,6 @@ class Task < ApplicationRecord
   enum priority:{'高': 2,'中': 1,'低': 0}
 
   belongs_to :user
+  has_many :labelings, dependent: :destroy
+  has_many :labeled_label, through: :labelings, source: :label
 end

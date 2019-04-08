@@ -48,6 +48,7 @@ RSpec.describe User, type: :model do
 
     it "is invalid with short password" do
       user = FactoryBot.build(:user,:with_short_password)
+      puts user.password
       user.valid?
       expect(user.errors[:password][0]).to include("は6文字以上で入力してください")
     end
