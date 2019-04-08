@@ -1,0 +1,30 @@
+<div class="container-fluid">
+  <h1 class="top_heading"> ラベル 一覧 </h1>
+  <table class="table">
+    <div>
+      <tr>
+        <th>ラベル名</th>
+        <th>内容</th>
+        <th>タスク件数</th>
+      </tr>
+    </div>
+    <% @labels.each do |label| %>
+    <div>
+      <tr>
+        <td><%= label.name %></td>
+        <td><%= label.content %></td>
+        <td>dummy</td>
+      </tr>
+    </div>
+    <% end %>
+  </table>
+  <div class="submit_row">
+    <%= link_to '新しいラベル', new_label_path,class: "btn btn-default" %>
+  </div>
+</div>
+
+
+
+
+
+
