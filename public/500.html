@@ -32,9 +32,9 @@
   }
 
   .rails-default-error-page h1 {
-    font-size: 100%;
+    font-size: 200%;
     color: #730E15;
-    line-height: 1.5em;
+    line-height: 2.0em;
   }
 
   .rails-default-error-page div.dialog > p {
@@ -56,11 +56,8 @@
 
 <body class="rails-default-error-page">
   <!-- This file lives in public/500.html -->
-  <div class="dialog">
-    <div>
-      <h1>We're sorry, but something went wrong.</h1>
-    </div>
-    <p>If you are the application owner check the logs for more information.</p>
-  </div>
+  <h1>We're sorry, but something went wrong.</h1>
+  <p>If you are the application owner check the logs for more information.</p>
+  <img src="/500_server_error.png" alt="404 not found">
 </body>
 </html>
