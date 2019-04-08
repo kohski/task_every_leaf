@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  before_create :first_user_is_admin
   before_update :exist_at_least_one_admin
   attr_accessor :is_abort_by_admin
   attr_accessor :commit_action
@@ -21,6 +22,12 @@ class User < ApplicationRecord
       if self.commit_action == "解除"
         self.is_abort_by_admin = true
       end
+    end
+  end
+
+  def first_user_is_admin
+    if User.count == 0
+      self.is_admin = true
     end
   end
 end

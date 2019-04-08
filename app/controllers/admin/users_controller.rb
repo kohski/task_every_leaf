@@ -37,7 +37,7 @@ class Admin::UsersController < ApplicationController
         redirect_to admin_users_path,notice: "管理者は最低一人必要です。中止しました。"
       else
         if params[:commit] == "解除" || params[:commit] == "付与"
-          redirect_to admin_users_path,notice: "編集しました"
+          redirect_to admin_users_path,notice: "権限変更しました"
         else
           redirect_to admin_user_path(@user.id),notice: "編集しました"
         end
