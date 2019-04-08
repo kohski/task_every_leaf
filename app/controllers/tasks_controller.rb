@@ -89,7 +89,7 @@ class TasksController < ApplicationController
   def build_labeling
     @task.labelings.destroy_all
     label_ids = params[:task][:label_ids]
-    if label_ids.size > 0
+    if label_ids && label_ids.size > 0
       label_ids.each do |id|
         @task.labelings.create(label_id:id)
       end
