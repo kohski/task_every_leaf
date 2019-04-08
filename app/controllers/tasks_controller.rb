@@ -7,7 +7,8 @@ class TasksController < ApplicationController
     if params.has_key?(:task) && params[:task][:search] == "true" 
       @name = params[:task][:name]
       @status = params[:task][:status]
-      @tasks = Task.where(user_id: current_user.id).search(@name, @status).page(params[:page]).per(10)
+      @label = params[:task][:label]
+      @tasks = Task.where(user_id: current_user.id).search(@name, @status).where(id: shaping_label_request(@label)).page(params[:page]).per(10)
     elsif params[:sort_expired]
       @tasks = Task.where(user_id: current_user.id).order(:expired_at).page(params[:page]).per(10)
     elsif params[:sort_priority]
@@ -54,7 +55,7 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    req = params.require(:task).permit(:name,:content,:'expired_at(1i)',:'expired_at(2i)',:'expired_at(3i)',:'expired_at(4i)',:'expired_at(5i)',:status,:priority,:'label_ids')
+    req = params.require(:task).permit(:name,:content,:'expired_at(1i)',:'expired_at(2i)',:'expired_at(3i)',:'expired_at(4i)',:'expired_at(5i)',:status,:priority,:label_ids)
     name = req[:name]
     content = req[:content]
     year = req[:'expired_at(1i)'].to_i
@@ -93,6 +94,15 @@ class TasksController < ApplicationController
       label_ids.each do |id|
         @task.labelings.create(label_id:id)
       end
+    end
+  end
+
+  def shaping_label_request(label_name)
+    if Label.where(name: @label).size > 0
+      @label_id = current_user.labels.where(name: @label)[0].id 
+      @task_ids_from_labelings = Labeling.where(label_id: @label_id).pluck(:task_id)
+    else
+      Task.all.pluck(:id)
     end
   end
 

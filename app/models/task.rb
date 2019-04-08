@@ -2,15 +2,21 @@ class Task < ApplicationRecord
 
   scope :search, -> (name,status){
     status = "" if status.to_i > 2
-    if name != "" && status !=""
-      where('name LIKE ? ',"%#{name}%").where(status: status)
-    elsif name != "" && status ==""
-      where('name LIKE ?',"%#{name}%")
-    elsif name == "" && status != ""
-      where(status: status)
-    else
-      all
-    end
+    label = "" if label == "未選択"
+    # if name != "" && status !=""
+    #   where('name LIKE ? ',"%#{name}%").where(status: status)
+    # elsif name != "" && status ==""
+    #   where('name LIKE ?',"%#{name}%")
+    # elsif name == "" && status != ""
+    #   where(status: status)
+    # else
+    #   all
+    # end
+
+    name == ''? name_search = all : name_search = where('name LIKE ? ',"%#{name}%")
+    status == ''? status_search = all : status_search = where(status: status)
+    # task_ids_from_labelings == ''? label_search = all : where(id: task_ids_from_labelings) 
+    name_search.merge(status_search)
   }
 
   validates :name, presence: true, length:{ in: 1..255  }
