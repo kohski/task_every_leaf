@@ -7,7 +7,7 @@ class TasksController < ApplicationController
     if params.has_key?(:task) && params[:task][:search] == "true" 
       @name = params[:task][:name]
       @status = params[:task][:status]
-      @label = params[:task][:label]
+      @label = params[:task][:label] unless params[:task][:label] == "未選択"
       @tasks = Task.where(user_id: current_user.id).search(@name, @status).where(id: shaping_label_request(@label)).page(params[:page]).per(10)
     elsif params[:sort_expired]
       @tasks = Task.where(user_id: current_user.id).order(:expired_at).page(params[:page]).per(10)

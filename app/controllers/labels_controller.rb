@@ -1,6 +1,7 @@
 class LabelsController < ApplicationController
-  before_action :set_label, only:[:show, :edit, :destroy]
-  
+  before_action :set_label, only:[:show, :edit, :destroy, :update]
+  before_action :logg_in_check
+
   def new
     @label = Label.new
   end
@@ -46,5 +47,12 @@ class LabelsController < ApplicationController
   def label_params
     params.require(:label).permit(:name, :content)
   end
+  
+  def logg_in_check
+    unless logged_in?
+      redirect_to new_session_path,notice: "ログインまたはサインアップしてください"
+    end
+  end
 
 end
+

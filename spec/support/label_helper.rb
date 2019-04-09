@@ -1,8 +1,8 @@
-def create_label(user)
+def create_label(user,keyword: "")
   count = user.labels.count
   @label = user.labels.create(
-    name: "task name",
-    content: "task content"
+    name: "label name" + " #{keyword}",
+    content: "label content" + " #{keyword}"
   )
   @label
 end
@@ -10,8 +10,8 @@ end
 def build_label(user)
   count = user.labels.count
   @label = user.labels.build(
-    name: "task name",
-    content: "task content"
+    name: "label name",
+    content: "label content"
   )
   @label
 end
