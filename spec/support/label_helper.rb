@@ -1,8 +1,8 @@
 def create_label(user,keyword: "")
   count = user.labels.count
   @label = user.labels.create(
-    name: "label name" + " #{keyword}",
-    content: "label content" + " #{keyword}"
+    name: "label name" + "#{keyword}",
+    content: "label content" + "#{keyword}"
   )
   @label
 end
