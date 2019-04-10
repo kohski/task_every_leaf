@@ -20,6 +20,19 @@
     <%= f.label :expired_at, class:"col-xs-offset-1 col-xs-2" %>
     <%= f.datetime_select :expired_at, class:"col-xs-8" %>
   </div>
+  <div class="row">
+    <%= f.label :label, class:"col-xs-offset-1 col-xs-2" %>
+    <div class="col-xs-8">
+      <% current_user.labels.each_with_index do |label,index| %>
+        <% if @task.labelings.pluck(:label_id).include?(label.id) %>
+          <%= f.check_box :label_ids, { multiple: true, checked: true, disabled: label[:desabeld], include_hidden: false },label[:id] %>
+        <% else%>
+          <%= f.check_box :label_ids, { multiple: true, checked: false, disabled: label[:desabeld], include_hidden: false },label[:id] %>
+        <% end %>
+        <%= f.label label.name, for: "task_label_ids_#{label.id}" %><br>
+      <% end %>
+    </div>
+  </div>
   <div class="row submit_row">
     <%= f.submit "登録",class:"col-xs-offset-1 btn btn-default"  %>
     <button class="btn btn-default"><%= link_to '一覧へ',tasks_path  %></button>

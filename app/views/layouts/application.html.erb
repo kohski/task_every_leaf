@@ -14,6 +14,7 @@
       <header class="clearfix">
         <div class="task_header">
           <%= link_to 'タスク一覧', tasks_path,class: "btn btn-default" %>
+          <%= link_to 'ラベル一覧', labels_path,class: "btn btn-default" %>
         </div>
         <div class="user_header">
           <% if admin? %>
@@ -56,6 +57,19 @@
             <%= @user.errors.full_messages.length %>件のエラー
           </div>
           <% @user.errors.full_messages.each do |err| %>
+          <div>
+            <%= err %>        
+          </div>
+          <% end %>
+        </div>
+      <% end %>
+      <!-- ユーザー登録失敗時のエラー表示 -->
+      <% if @label && @label.class != String && @label.errors.any? %>
+        <div class="panel panel-danger">
+          <div class="panel-heading">
+            <%= @label.errors.full_messages.length %>件のエラー
+          </div>
+          <% @label.errors.full_messages.each do |err| %>
           <div>
             <%= err %>        
           </div>

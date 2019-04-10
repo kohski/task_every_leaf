@@ -10,6 +10,8 @@
     <%= f.text_field :name, value: @name %>
     <%= f.label :status_search, "状態検索" %>
     <%= f.select :status,[["未選択",4],["未着手",0],["着手",1],["完成",2]], selected: @status %>
+    <%= f.label :label_search, "ラベル検索" %>
+    <%= f.select :label, ["未選択"]+current_user.labels.pluck(:name), multiple: true%>
     <%= f.hidden_field :search, value: true %>
     <%= f.submit "Search!" %>  
   </div>

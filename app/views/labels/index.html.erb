@@ -1,0 +1,32 @@
+<div class="container-fluid">
+  <h1 class="top_heading"> ラベル 一覧 </h1>
+  <table class="table">
+    <div>
+      <tr>
+        <th>ラベル名</th>
+        <th>内容</th>
+        <th>編集</th>
+        <th>削除</th>
+      </tr>
+    </div>
+    <% @labels.each do |label| %>
+    <div>
+      <tr>
+        <td><%= label.name %></td>
+        <td><%= label.content %></td>
+        <td><%= link_to '編集', edit_label_path(label.id), class: "btn btn-default" %></td>
+        <td><%= link_to '削除', label_path(label.id), method: :delete, class: "btn btn-default" %></td>
+      </tr>
+    </div>
+    <% end %>
+  </table>
+  <div class="submit_row">
+    <%= link_to '新しいラベル', new_label_path,class: "btn btn-default" %>
+  </div>
+</div>
+
+
+
+
+
+

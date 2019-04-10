@@ -1,20 +1,22 @@
 class Task < ApplicationRecord
 
-  # scope :search_both, -> (name, status){where('name LIKE ? ',"%#{name}%").where(status: status)}
-  # scope :search_name, ->(name){ where('name LIKE ?',"%#{name}%") }
-  # scope :search_status, -> (status){ where(status: status) }
-
   scope :search, -> (name,status){
     status = "" if status.to_i > 2
-    if name != "" && status !=""
-      where('name LIKE ? ',"%#{name}%").where(status: status)
-    elsif name != "" && status ==""
-      where('name LIKE ?',"%#{name}%")
-    elsif name == "" && status != ""
-      where(status: status)
-    else
-      all
-    end
+    label = "" if label == "未選択"
+    # if name != "" && status !=""
+    #   where('name LIKE ? ',"%#{name}%").where(status: status)
+    # elsif name != "" && status ==""
+    #   where('name LIKE ?',"%#{name}%")
+    # elsif name == "" && status != ""
+    #   where(status: status)
+    # else
+    #   all
+    # end
+
+    name == ''? name_search = all : name_search = where('name LIKE ? ',"%#{name}%")
+    status == ''? status_search = all : status_search = where(status: status)
+    # task_ids_from_labelings == ''? label_search = all : where(id: task_ids_from_labelings) 
+    name_search.merge(status_search)
   }
 
   validates :name, presence: true, length:{ in: 1..255  }
@@ -24,4 +26,6 @@ class Task < ApplicationRecord
   enum priority:{'高': 2,'中': 1,'低': 0}
 
   belongs_to :user
+  has_many :labelings, dependent: :destroy
+  has_many :labeled_label, through: :labelings, source: :label
 end

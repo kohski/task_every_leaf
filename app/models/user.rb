@@ -10,9 +10,8 @@ class User < ApplicationRecord
             uniqueness: true
   has_secure_password
   has_many :tasks, dependent: :destroy
-  def validate_on_create
-    validates :password, presence: true, length:{ minimum:6 }  
-  end 
+  has_many :labels, dependent: :destroy
+  validates :password, presence: true, length:{ minimum:6 }, on: :create
 
   private
 
